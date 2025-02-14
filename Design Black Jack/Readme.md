@@ -1,50 +1,82 @@
-<b> Design Blackjack </b>
+🎲 Blackjack - Object-Oriented Design
+🃏 Background
+Blackjack is a classic casino card game where players aim to get a hand value as close to 21 as possible without exceeding it. The player competes against the dealer, with the following rules:
 
-<b> Background </b>
-Blackjack is a popular card game played in casinos. The goal is to get a hand with a value as close to 21 as possible without going over.
+Initial Hands: Both the player and the dealer receive two cards.
+The player sees both their cards.
+The dealer’s second card is hidden.
+Player's Turn: The player can hit (draw a card) or stand (stop).
+Dealer's Turn: The dealer must keep drawing until they reach a value of at least N, where N = player's hand value.
+Winning Conditions:
+If the player exceeds 21, they lose.
+If the dealer exceeds 21, the player wins.
+The higher hand (≤ 21) wins.
+A tie results in a push (no winner).
 
-The player is dealt (or draws) two cards and can choose to draw more or stop. The dealer is dealt two cards as well, but only one is visible to the player. The player wins if their hand is closer to 21 than the dealer's hand. But if they go over 21 they automatically lose. If the player and dealer have the same value, it's a tie.
+📌 Key Requirements
+✅ Two Players: Dealer and User
+✅ One Deck of 52 Cards: Refilled after each round
+✅ Betting System: The player can wager money, but the dealer never runs out of funds 
 
-Requirements
-Obviously this isn't a test of how well you know blackjack. You want to clarify the requirements with the interviewer, because they might have completely different requirements in mind.
+🛠 Requirements & Game Rules
+🔎 Clarifying Questions
+Before designing, some important questions to clarify:
+✅ How many players? → Two (Player vs. Dealer)
+✅ How many decks? → One (Refilled after each round)
+✅ Is gambling involved? → Yes, the player starts with an initial balance
+✅ Are suits relevant? → No (only card values matter)
 
-Some possible questions to ask:
+🃏 Cards & Deck Structure
+52 cards in a deck (Hearts ♦️, Spades ♠️, Diamonds ♦️, Clubs ♣️)
+13 cards per suit
+Card Values:
+Numbered (2-10) → Face value
+Face Cards (J, Q, K) → 10 points
+Ace (A) → Can be 1 or 11, whichever benefits the player
 
-How many cards are in a deck? what kind? etc.
-Is the deck refilled after each round?
-How many players?
-Are we implementing gambling or score-keeping?
-Basics
-Only two players, including the dealer
-Only one deck of cards, which is refilled after each round
-We are implementing a gambling system for the non-dealer player
-Cards
-There are 52 cards in a deck
-Each card has a suit (hearts, spades, diamonds, clubs) and there are 13 cards in each suit
-A card could be
-numbered (2-10) and have the same point value
-a face (jack, queen, king) and have a point value of 10
-an ace and have a point value of 1 or 11, whichever is better for the player
-Game Round
-To start each round, both the dealer and the player are dealt two cards
-One of the dealer's cards is hidden from the player
-The player can choose to draw one more card until they go over 21 or decide to stop
-If they go over 21, they lose and the round is over
-The dealer will draw until they have a hand value of N or more, where N is the player's hand value
-If the dealer goes over 21, the player wins
-At the end, if the dealer's hand value is greater than the player's, the dealer wins
-Gambling
-A player can start with an arbitrary amount of money
-The player can bet as much money as they have
-The dealer will never run out of money
-Design
-High-level
-A Card will have a Suit and a Value
-The suit is irrelevant for blackjack, but if our game had a UI it would be useful information.
-Similarly, a ten, jack, queen, and king all have the same value, so we won't distinguish between them.
-But these points would be worth clarifying. You don't want to overengineer a solution, but you also don't want to make major assumptions without clarifying with your interviewer.
-A Deck will have an array of Cards
-The deck will be responsible for shuffling and popping (drawing) Cards
-A Player could be either the Dealer or the User, and since both will a Hand, the Player can be an abstract class
-The Player will also be responsible for making a move (drawing or stopping)
-The UserPlayer will also have a Balance and be able to place a Bet
+🎲 Gameplay Mechanics
+1️⃣ Starting a Round
+
+The dealer and player each receive two cards
+The dealer's second card is hidden
+2️⃣ Player's Turn
+
+Choose to Hit (draw a card) or Stand (stop)
+If total exceeds 21, the player loses immediately
+3️⃣ Dealer's Turn
+
+The dealer must draw until reaching at least the player’s total
+If the dealer exceeds 21, the player wins
+4️⃣ Win Conditions
+
+Player wins if their hand value is higher than the dealer's
+Dealer wins if their hand is higher than the player's
+Tie if both values are equal
+💰 Gambling System
+The player starts with a balance
+The player places a bet each round
+The dealer never runs out of money
+🏗 Object-Oriented Design
+📌 Classes & Responsibilities
+Class	Responsibility
+Card	Represents a playing card with suit and value
+Deck	Manages the shuffling and drawing of cards
+Player (Abstract)	Represents both Dealer and UserPlayer
+Dealer	Draws cards following game rules
+UserPlayer	Places bets, makes moves, tracks balance
+Game	Controls the flow of gameplay
+
+🚀 How to Run
+1️⃣ Clone the repository
+
+bash
+Copy
+Edit
+git clone https://github.com/your-username/Object-Oriented-Design.git
+cd Object-Oriented-Design/Blackjack
+2️⃣ Run the game
+
+bash
+Copy
+Edit
+python Game.py
