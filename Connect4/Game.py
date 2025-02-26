@@ -13,7 +13,8 @@ class Game:
         for player in self._players:
             self._score[player.getName()] = 0
 
-    def printBoard(self):
+    def printBoard(self) -> None:
+        ''' Prints the current state of Board '''
         print('Board:\n')
         grid = self._grid.getGrid()
         for i in range(len(grid)):
@@ -28,7 +29,8 @@ class Game:
             print(row)
         print('')
 
-    def playMove(self, player):
+    def playMove(self, player) -> Tuple[int,int]:
+        ''' select the row and column to place the next peice '''
         self.printBoard()
         print(f"{player.getName()}'s turn")
         colCnt = self._grid.getColumnCount()
@@ -36,7 +38,7 @@ class Game:
         moveRow = self._grid.placePiece(moveColumn, player.getPieceColor())
         return (moveRow, moveColumn)
 
-    def playRound(self):
+    def playRound(self) -> Player:
         while True:
             for player in self._players:
                 row, col = self.playMove(player)
@@ -45,7 +47,7 @@ class Game:
                     self._score[player.getName()] += 1
                     return player
 
-    def play(self):
+    def play(self) -> None :
         maxScore = 0
         winner = None
         while maxScore < self._targetScore:
